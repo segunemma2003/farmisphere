@@ -73,7 +73,7 @@ if (!function_exists('userID')) {
 if (!function_exists('noImage')) {
     function noImage()
     {
-        return asset("public/frontend/default/assets/img/no-data-found.png");
+        return asset("frontend/default/assets/img/no-data-found.png");
     }
 }
 
@@ -143,7 +143,7 @@ if (!function_exists('getRender')) {
     # get view of theme with render
     function getRender($path, $data = [])
     {
-        return view('frontend.default'. '.' . $path, $data)->render();
+        return view('frontend.default' . '.' . $path, $data)->render();
     }
 }
 
@@ -223,7 +223,7 @@ if (!function_exists('staticAsset')) {
         if (str_contains(url('/'), '.test') || str_contains(url('/'), 'http://127.0.0.1:')) {
             return app('url')->asset('' . $path, $secure) . '?v=' . env('APP_VERSION');
         }
-        return app('url')->asset('public/' . $path, $secure) . '?v=' . env('APP_VERSION');
+        return app('url')->asset('' . $path, $secure) . '?v=' . env('APP_VERSION');
     }
 }
 
@@ -234,7 +234,7 @@ if (!function_exists('staticAssetApi')) {
         if (str_contains(url('/'), '.test') || str_contains(url('/'), 'http://127.0.0.1:')) {
             return app('url')->asset('' . $path, $secure);
         }
-        return app('url')->asset('public/' . $path, $secure);
+        return app('url')->asset('' . $path, $secure);
     }
 }
 
@@ -428,11 +428,11 @@ if (!function_exists('fileDelete')) {
     }
 }
 
-if(!function_exists('isGreater')) {
+if (!function_exists('isGreater')) {
     function isGreater($currentVersion, $upcomingVersion, $isNumberConversion = false, $replaceValue = ["."], $replaceWith = "")
     {
 
-        if($isNumberConversion) {
+        if ($isNumberConversion) {
             $currentVersion  = intval(str_replace($replaceValue, $replaceWith, $currentVersion));
             $upcomingVersion = intval(str_replace($replaceValue, $replaceWith, $upcomingVersion));
         }
@@ -442,7 +442,7 @@ if(!function_exists('isGreater')) {
 }
 
 
-if(!function_exists('getNumberFromString')) {
+if (!function_exists('getNumberFromString')) {
     function getNumberFromString($str, $replaceValue = ["."], $replaceWith = "")
     {
         return intval(str_replace($replaceValue, $replaceWith, $str));
@@ -450,17 +450,17 @@ if(!function_exists('getNumberFromString')) {
 }
 
 
-if(!function_exists('currentVersion')) {
+if (!function_exists('currentVersion')) {
     function currentVersion($isNumber = false)
     {
         # need to check bcz of setup route
-        if(Schema::hasTable('system_settings')) {
+        if (Schema::hasTable('system_settings')) {
             $settings = SystemSetting::where('entity', 'software_version')->first();
-            if($settings) {
+            if ($settings) {
                 $version = $settings->value;
             }
         }
-        if(empty($version)){
+        if (empty($version)) {
             $version = env('APP_VERSION') ? str_replace('v', '', env('APP_VERSION')) : null;
         }
 
@@ -506,7 +506,7 @@ if (!function_exists('renderStarRatingFront')) {
     function renderStarRatingFront($rating, $maxRating = 5)
     {
         $fullStar = '<li><i class="fas fa-star"></i></li>';
-        if(getTheme() == "halal"){
+        if (getTheme() == "halal") {
             $fullStar = '<li><span class="d-inline-block fs-14 clr-warning">
                 <i class="fas fa-star"></i>
             </span></li>';
@@ -801,14 +801,14 @@ if (!function_exists('generateVariationOptions')) {
             }
             $data['id'] = $id;
 
-            if($withTrash == true) {
+            if ($withTrash == true) {
                 $data['name'] = Variation::withTrashed()->find($id)->collectLocalization('name');
-            }else{
+            } else {
                 $data['name'] = Variation::find($id) ? Variation::find($id)->collectLocalization('name') : null;
             }
-            if( $data['name']){
+            if ($data['name']) {
                 $data['values'] = $variationValues;
-            }else{
+            } else {
                 $data['values'] = $variationValues;
             }
 
@@ -1278,7 +1278,7 @@ if (!function_exists('recaptchaValidation')) {
     function recaptchaValidation($request)
     {
         $score = 1;
-        if (getSetting('enable_recaptcha') == 1){
+        if (getSetting('enable_recaptcha') == 1) {
             $score = RecaptchaV3::verify($request->get('g-recaptcha-response'), 'recaptcha_token');
         }
         return $score;
@@ -1287,50 +1287,53 @@ if (!function_exists('recaptchaValidation')) {
 
 
 if (!function_exists('allMonths')) {
-    function allMonths(){
+    function allMonths()
+    {
         $month = [];
 
-        for ($m=1; $m<=12; $m++) {
-             $month[] = date('F', mktime(0,0,0,$m, 1, date('Y')));
+        for ($m = 1; $m <= 12; $m++) {
+            $month[] = date('F', mktime(0, 0, 0, $m, 1, date('Y')));
         }
 
         return $month;
     }
 }
 
- # module check
- if(!function_exists('isModuleActive')){
-    function isModuleActive($name) {
+# module check
+if (!function_exists('isModuleActive')) {
+    function isModuleActive($name)
+    {
 
         $module = Module::find($name);
-        if($module) {
+        if ($module) {
             $status = $module->isEnabled();
-            if($status == true) {
-                $modulePath = $module->getPath() .'/Providers/RouteServiceProvider.php';
-                if(file_exists($modulePath)) {
+            if ($status == true) {
+                $modulePath = $module->getPath() . '/Providers/RouteServiceProvider.php';
+                if (file_exists($modulePath)) {
                     $module = EnmartModule::where('name', $name)->first();
-                    if($module) {
-                        if($module->is_default == 1) {
+                    if ($module) {
+                        if ($module->is_default == 1) {
                             $status = true;
                         }
-                        if($module->is_paid == 1) {
+                        if ($module->is_paid == 1) {
                             $status = $module->purchase_code && $module->domain  ? true : false;
                         }
-                    }else{
+                    } else {
                         $status = false;
                     }
-                }else{
+                } else {
                     $status = false;
                 }
             }
         }
         return $status;
     }
- }
+}
 
- # text to a slug.
-if(!function_exists('convertToSlug')) {
-    function convertToSlug($text) {
+# text to a slug.
+if (!function_exists('convertToSlug')) {
+    function convertToSlug($text)
+    {
 
         $text = mb_strtolower(trim(preg_replace('~[^\pL\d]+~u', ' ', $text)));
 
@@ -1342,7 +1345,7 @@ if(!function_exists('convertToSlug')) {
 
         // Remove leading and trailing dashes
         $slug = trim($slug, '-');
-        if($slug == '') {
+        if ($slug == '') {
             $normalize = new SlugNormalizer;
             $slug = $normalize->normalize($text);
         }
@@ -1351,46 +1354,107 @@ if(!function_exists('convertToSlug')) {
 }
 
 # This function removes diacritics from Vietnamese text.
-if(!function_exists('removeDiacritics')) {
-    function removeDiacritics($text) {
+if (!function_exists('removeDiacritics')) {
+    function removeDiacritics($text)
+    {
         $diacritics = array(
-            'à' => 'a', 'á' => 'a', 'ạ' => 'a', 'ả' => 'a', 'ã' => 'a', 'â' => 'a', 'ầ' => 'a', 'ấ' => 'a', 'ậ' => 'a', 'ẩ' => 'a', 'ẫ' => 'a', 'ă' => 'a', 'ằ' => 'a', 'ắ' => 'a', 'ặ' => 'a', 'ẳ' => 'a', 'ẵ' => 'a',
-            'è' => 'e', 'é' => 'e', 'ẹ' => 'e', 'ẻ' => 'e', 'ẽ' => 'e', 'ê' => 'e', 'ề' => 'e', 'ế' => 'e', 'ệ' => 'e', 'ể' => 'e', 'ễ' => 'e',
-            'ì' => 'i', 'í' => 'i', 'ị' => 'i', 'ỉ' => 'i', 'ĩ' => 'i',
-            'ò' => 'o', 'ó' => 'o', 'ọ' => 'o', 'ỏ' => 'o', 'õ' => 'o', 'ô' => 'o', 'ồ' => 'o', 'ố' => 'o', 'ộ' => 'o', 'ổ' => 'o', 'ỗ' => 'o', 'ơ' => 'o', 'ờ' => 'o', 'ớ' => 'o', 'ợ' => 'o', 'ở' => 'o', 'ỡ' => 'o',
-            'ù' => 'u', 'ú' => 'u', 'ụ' => 'u', 'ủ' => 'u', 'ũ' => 'u', 'ư' => 'u', 'ừ' => 'u', 'ứ' => 'u', 'ự' => 'u', 'ử' => 'u', 'ữ' => 'u',
-            'ỳ' => 'y', 'ý' => 'y', 'ỵ' => 'y', 'ỷ' => 'y', 'ỹ' => 'y',
+            'à' => 'a',
+            'á' => 'a',
+            'ạ' => 'a',
+            'ả' => 'a',
+            'ã' => 'a',
+            'â' => 'a',
+            'ầ' => 'a',
+            'ấ' => 'a',
+            'ậ' => 'a',
+            'ẩ' => 'a',
+            'ẫ' => 'a',
+            'ă' => 'a',
+            'ằ' => 'a',
+            'ắ' => 'a',
+            'ặ' => 'a',
+            'ẳ' => 'a',
+            'ẵ' => 'a',
+            'è' => 'e',
+            'é' => 'e',
+            'ẹ' => 'e',
+            'ẻ' => 'e',
+            'ẽ' => 'e',
+            'ê' => 'e',
+            'ề' => 'e',
+            'ế' => 'e',
+            'ệ' => 'e',
+            'ể' => 'e',
+            'ễ' => 'e',
+            'ì' => 'i',
+            'í' => 'i',
+            'ị' => 'i',
+            'ỉ' => 'i',
+            'ĩ' => 'i',
+            'ò' => 'o',
+            'ó' => 'o',
+            'ọ' => 'o',
+            'ỏ' => 'o',
+            'õ' => 'o',
+            'ô' => 'o',
+            'ồ' => 'o',
+            'ố' => 'o',
+            'ộ' => 'o',
+            'ổ' => 'o',
+            'ỗ' => 'o',
+            'ơ' => 'o',
+            'ờ' => 'o',
+            'ớ' => 'o',
+            'ợ' => 'o',
+            'ở' => 'o',
+            'ỡ' => 'o',
+            'ù' => 'u',
+            'ú' => 'u',
+            'ụ' => 'u',
+            'ủ' => 'u',
+            'ũ' => 'u',
+            'ư' => 'u',
+            'ừ' => 'u',
+            'ứ' => 'u',
+            'ự' => 'u',
+            'ử' => 'u',
+            'ữ' => 'u',
+            'ỳ' => 'y',
+            'ý' => 'y',
+            'ỵ' => 'y',
+            'ỷ' => 'y',
+            'ỹ' => 'y',
             'đ' => 'd',
         );
         return strtr($text, $diacritics);
     }
 }
 
-if(!function_exists('active_themes_array')){
-    function active_themes_array(){
-       return json_decode(getSetting('active_themes')) ?? [1];
+if (!function_exists('active_themes_array')) {
+    function active_themes_array()
+    {
+        return json_decode(getSetting('active_themes')) ?? [1];
     }
 }
 
-if(!function_exists('current_theme')){
-    function current_theme($code = null){
-        if($code){
+if (!function_exists('current_theme')) {
+    function current_theme($code = null)
+    {
+        if ($code) {
             return $theme = Theme::where('code', $code)->first();
         }
         $code = session()->get('theme') ?? 'default';
         $theme = Theme::where('code', $code)->first();
 
         return $theme;
-
     }
 }
 
 
-if(!function_exists('appStatic')){
-    function appStatic(){
+if (!function_exists('appStatic')) {
+    function appStatic()
+    {
 
         return new \App\Utils\AppStatic();
-
     }
 }
-
