@@ -1,0 +1,24 @@
+Update guide:
+
+PHP Version Requirment : 8.1
+
+Go to your cpanel root directory in which your previous version is running  :
+
+ Step 1 : Delete bootstrap\cache\packages.php file
+ Step 2 : Delete Vendor file or rename it .
+
+
+1. Please keep an old copy of your current version for any kind of accidental breaking issues.(mainly Public folder)
+
+2. Extract the downloaded file from codecanyon.
+
+3. There you will get a zip folder named ‘updates.zip’. Upload that to the root directory on your server in which your previous version is running. Right Click on the zip file. Unzip that "updates.zip" file by selecting “Extract here”.
+
+4. Now go to the home page of your website (www.yourdomain.com) and click on ‘Update Now’.
+
+5. Update will be completed!  
+
+
+Note : After update check payment gateway from system setting and if changed, update it.
+
+and if you are using hostiger cpanel before update contact with us because of hostiger has  file/folder replacing issue.
