@@ -6,6 +6,7 @@ use App\Models\Theme;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
+        URL::forceSchema('https');
         try {
 
             if (Schema::hasTable('themes')) {
@@ -36,7 +38,6 @@ class AppServiceProvider extends ServiceProvider
                 view()->share('themes', $themes);
             }
         } catch (\Exception $e) {
-            
         }
     }
 }
