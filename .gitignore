@@ -18,5 +18,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+git add .gitignore
+git commit -m "Add large files to .gitignore"
 updates.zip
 upload_this.zip
