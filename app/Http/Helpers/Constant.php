@@ -247,7 +247,7 @@ if (!function_exists('uploadedAsset')) {
             if (str_contains(url('/'), '.test') || str_contains(url('/'), 'http://127.0.0.1:')) {
                 return app('url')->asset('' . $mediaFile->media_file);
             }
-            return app('url')->asset('public/' . $mediaFile->media_file);
+            return app('url')->asset('' . $mediaFile->media_file);
         }
         return noImage();
     }
@@ -268,7 +268,7 @@ if (!function_exists('uploadedAssetes')) {
                 if (str_contains(url('/'), '.test') || str_contains(url('/'), 'http://127.0.0.1:')) {
                     $assets[] = app('url')->asset('' . $file->media_file);
                 }
-                $assets[] = app('url')->asset('public/' . $file->media_file);
+                $assets[] = app('url')->asset('' . $file->media_file);
             }
         }
         return $assets;
