@@ -18,8 +18,7 @@ use App\Models\Theme;
 use Illuminate\Support\Facades\Schema;
 use League\CommonMark\Normalizer\SlugNormalizer;
 use Illuminate\Support\Facades\Artisan;
-
-
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('ddError')) {
     # get error  information
@@ -244,10 +243,11 @@ if (!function_exists('uploadedAsset')) {
     {
         $mediaFile = MediaManager::find($fileId);
         if (!is_null($mediaFile)) {
-            if (str_contains(url('/'), '.test') || str_contains(url('/'), 'http://127.0.0.1:')) {
-                return app('url')->asset('' . $mediaFile->media_file);
-            }
-            return app('url')->asset('' . $mediaFile->media_file);
+            return Storage::url($mediaFile->media_file);
+            // if (str_contains(url('/'), '.test') || str_contains(url('/'), 'http://127.0.0.1:')) {
+            //     return app('url')->asset('' . $mediaFile->media_file);
+            // }
+            // return app('url')->asset('' . $mediaFile->media_file);
         }
         return noImage();
     }
