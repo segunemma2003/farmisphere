@@ -454,7 +454,7 @@
                                 </div>
                             </a>
                         </div>
-                        <button class="gshop-offcanvas-btn offcanvas-toggle ms-3">
+                        <button class="gshop-offcanvas-btn offcanvas-toggle ms-3" style="background:#9DFF00 !important;">
                             <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

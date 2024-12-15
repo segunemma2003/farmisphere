@@ -23,10 +23,10 @@
 
                                     <div class="hero-btns d-flex align-items-center gap-3 gap-sm-5 flex-wrap">
                                         <a href="{{ $slider->link }}"
-                                            class="btn btn-secondary">{{ localize('Explore Now') }}<span
+                                            class="btn btn-secondary" style="background:#0f7909 !important;">{{ localize('Explore Now') }}<span
                                                 class="ms-2"><i class="fa-solid fa-arrow-right"></i></span></a>
                                         <a href="{{ route('home.pages.aboutUs') }}"
-                                            class="btn btn-primary">{{ localize('About Us') }}<span class="ms-2"><i
+                                            class="btn btn-primary" style="background:#6EB356 !important;">{{ localize('About Us') }}<span class="ms-2"><i
                                                     class="fa-solid fa-arrow-right"></i></span></a>
                                     </div>
                                 </div>
