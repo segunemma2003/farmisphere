@@ -189,6 +189,9 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+.bg-new-primary{
+    background:#0f7909;
+}
 body {
     margin: 0;
     font-family: var(--bs-body-font-family);
@@ -9956,6 +9959,10 @@ fieldset:disabled .btn {
         var(--bs-bg-opacity)
     ) !important;
 }
+
+.bg-new-light-primary{
+    background:#9DFF00;
+  }
 .bg-accent {
     --bs-bg-opacity: 1;
     background-color: rgba(

@@ -22343,6 +22343,15 @@ textarea.form-control-lg {
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
 }
 
+
+.bg-new-primary{
+    background:#0f7909;
+}
+
+.bg-new-light-primary{
+  background:#9DFF00;
+}
+
 .bg-secondary {
   --bs-bg-opacity:1;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
@@ -29716,7 +29725,7 @@ body {
 .gshop-offcanvas-btn {
   width: 70px;
   height: 70px;
-  background-color: #ff7c08;
+  background-color: #9DFF00;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;

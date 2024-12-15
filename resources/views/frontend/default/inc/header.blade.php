@@ -1,11 +1,12 @@
 <header class="gheader position-relative z-2 header-sticky">
     @php
-        $bgClass = 'bg-primary';
+        // $bgClass = 'bg-primary';
+        $bgClass= 'bg-new-primary';
         if (getTheme() == 'halal') {
             $bgClass = 'bg-meat-primary';
         }
     @endphp
-    <div class="ghead-topbar {{ $bgClass }} d-none d-lg-block">
+    <div class="ghead-topbar  d-none d-lg-block" style="background:#0f7909;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xxl-4 col-xl-3">
@@ -146,7 +147,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="javascript:void(0)" class="btn btn-link p-0 tt-theme-toggle fw-normal text-light">
                                 <div class="tt-theme-light" data-bs-toggle="tooltip" data-bs-placement="left"
                                     data-bs-title="Dark">{{ localize('Dark') }} <i class="fas fa-moon fs-lg ms-1"></i>
@@ -155,7 +156,7 @@
                                     data-bs-title="Light">{{ localize('Light') }} <i class="fas fa-sun fs-lg ms-1"></i>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
