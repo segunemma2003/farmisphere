@@ -23,7 +23,6 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },
             endpoint: TT.baseUrl+'/media-manager/add-files',
-            // endpoint: 'https://goldfish-app-urkpy.ondigitalocean.app/media-manager/add-files'
             fieldName: "media_file",
             formData: true,
         })

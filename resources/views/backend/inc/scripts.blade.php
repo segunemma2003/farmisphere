@@ -26,7 +26,8 @@
         files_added: '{{ localize('Files added') }}',
         no_file_chosen: '{{ localize('No file chosen') }}',
     };
-    TT.baseUrl = '{{ \Request::root() }}';
+    // TT.baseUrl = '{{ \Request::root() }}';
+    TT.baseUrl = '{{ url()->to('/') }}';
 
     // on click delete confirmation -- outside footable
     function confirmDelete(thisLink) {
